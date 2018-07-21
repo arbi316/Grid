@@ -1200,7 +1200,6 @@ function GridStatusAuras:UnitGainedDurationStatus(status, guid, class, name, ico
 		end
 		self.durationAuras[status][guid] = {
 			class = class,
-			rank = nil,
 			icon = icon,
 			count = count,
 			debuffType = debuffType,

@@ -49,12 +49,10 @@ local spell_names = {
 	["Beacon of Virtue"] = GetSpellInfo(200025),
 	["Forbearance"] = GetSpellInfo(25771),
 	["Sacred Dawn"] = GetSpellInfo(243174),
-	["Tyr's Deliverance"] = GetSpellInfo(200654),
 -- Priest
 	["Atonement"] = GetSpellInfo(214206),
 	["Clarity of Will"] = GetSpellInfo(152118),
 	["Guardian Spirit"] = GetSpellInfo(47788),
-	["Light of T'uure"] = GetSpellInfo(208065),
 	["Power Word: Shield"] = GetSpellInfo(17),
 	["Prayer of Mending"] = GetSpellInfo(33076),
 	["Renew"] = GetSpellInfo(139),
@@ -332,16 +330,6 @@ GridStatusAuras.defaultDB = {
 		durationColorMiddle = { r = 0.66, g = 0.7, b = 0.49, a = 1 },
 		durationColorHigh = { r = 0.43, g = 0.45, b = 0.32, a = 1 },
 	},
-	[GridStatusAuras:StatusForSpell("Tyr's Deliverance")] = {
-		-- 200654
-		desc = format(L["Debuff: %s"], spell_names["Tyr's Deliverance"]),
-		debuff = spell_names["Tyr's Deliverance"],
-		text = GridStatusAuras:TextForSpell(spell_names["Tyr's Deliverance"]),
-		color = { r = 0.95, g = 0.82, b = 0.33, a = 1 },
-		durationColorLow = { r = 0.95, g = 0.82, b = 0.33, a = 1 },
-		durationColorMiddle = { r = 0.65, g = 0.56, b = 0.23, a = 1 },
-		durationColorHigh = { r = 0.45, g = 0.38, b = 0.16, a = 1 },
-	},
 	[GridStatusAuras:StatusForSpell("Forbearance")] = {
 		-- 25771
 		desc = format(L["Debuff: %s"], spell_names["Forbearance"]),
@@ -383,17 +371,6 @@ GridStatusAuras.defaultDB = {
 		durationColorLow = { r = 0.4, g = 0.73, b = 1, a = 1 },
 		durationColorMiddle = { r = 0.24, g = 0.54, b = 0.8, a = 1 },
 		durationColorHigh = { r = 0.13, g = 0.41, b = 0.65, a = 1 },
-		mine = true,
-	},
-	[GridStatusAuras:StatusForSpell("Light of T'uure", true)] = {
-		-- 208065
-		desc = format(L["Buff: %s"], spell_names["Light of T'uure"]),
-		buff = spell_names["Light of T'uure"],
-		text = GridStatusAuras:TextForSpell(spell_names["Light of T'uure"]),
-		color = { r = 0.33, g = 0.46, b = 1, a = 1 },
-		durationColorLow = { r = 0.33, g = 0.46, b = 1, a = 1 },
-		durationColorMiddle = { r = 0.24, g = 0.33, b = 0.7, a = 1 },
-		durationColorHigh = { r = 0.17, g = 0.23, b = 0.5, a = 1 },
 		mine = true,
 	},
 	[GridStatusAuras:StatusForSpell("Power Word: Shield", true)] = {
@@ -1696,7 +1673,7 @@ function GridStatusAuras:ScanUnitAuras(event, unit, guid)
 			--[[
 			elseif isBossAura then
 				seenBossAura = true
-				self:UnitGainedBossDebuff(guid, class, name, rank, icon, count, debuffType, duration, expirationTime, casterUnit, canStealOrPurge, shouldConsolidate, spellID, canApply, isBossAura, isCastByPlayer)
+				self:UnitGainedBossDebuff(guid, class, name, icon, count, debuffType, duration, expirationTime, casterUnit, canStealOrPurge, shouldConsolidate, spellID, canApply, isBossAura, isCastByPlayer)
 			]]
 			elseif debuff_types[debuffType] then
 				-- elseif so that a named debuff doesn't trigger the type status

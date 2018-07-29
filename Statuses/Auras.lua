@@ -1638,10 +1638,9 @@ function GridStatusAuras:ScanUnitAuras(event, unit, guid)
 	end
 
 	if UnitIsVisible(unit) then
-		local i = 0
-		while true do
-			i = i + 1
+		for i = 1, 40 do
 			local name, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(unit, i, "HELPFUL")
+
 			if not name then
 				break
 			end
@@ -1651,6 +1650,14 @@ function GridStatusAuras:ScanUnitAuras(event, unit, guid)
 				buff_names_seen[name] = true
 				self:UnitGainedBuff(guid, class, name, icon, count, debuffType, duration, expirationTime, caster, isStealable)
 			end
+		end
+
+		for i = 1, 40 do
+			local name, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(unit, i, "HELPFUL|PLAYER")
+
+			if not name then
+				break
+			end
 
 			-- scan for buffs cast by the player
 			if player_buff_names[name] then
@@ -1658,7 +1665,7 @@ function GridStatusAuras:ScanUnitAuras(event, unit, guid)
 				self:UnitGainedPlayerBuff(guid, class, name, icon, count, debuffType, duration, expirationTime, caster, isStealable)
 			end
 		end
-
+		
 		-- scan for debuffs
 		for index = 1, 40 do
 			local name, icon, count, debuffType, duration, expirationTime, casterUnit, canStealOrPurge, shouldConsolidate, spellID, canApply, isBossAura, isCastByPlayer = UnitAura(unit, index, "HARMFUL")
